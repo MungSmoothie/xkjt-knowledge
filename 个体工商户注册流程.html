@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个体工商户注册流程 · 承接软件项目</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--p:#8b2635;--bg:#faf8f3;--s:#fff;--b:#e8e0d5;--t:#1a1a1a;--m:#999;--h:56px;--sidebar:220px}
+body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--t)}
+a{text-decoration:none;color:var(--p)}
+.topnav{height:var(--h);background:var(--p);color:#fff;display:flex;align-items:center;padding:0 24px;gap:16px;position:fixed;top:0;left:0;right:0;z-index:200;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.topnav .logo{font-size:18px;font-weight:700}
+.topnav h1{font-size:14px;font-weight:400;opacity:.9;flex:1}
+.topnav .badge{font-size:10px;background:rgba(255,255,255,.2);padding:2px 8px;border-radius:4px}
+.body{padding-top:var(--h);display:flex;min-height:100vh}
+.sidebar{width:var(--sidebar);flex-shrink:0;background:var(--s);border-right:1px solid var(--b);position:fixed;top:var(--h);left:0;bottom:0;overflow-y:auto;padding:12px 0}
+.sidebar a{display:block;padding:6px 16px;font-size:12.5px;color:#555;transition:all .1s}
+.sidebar a:hover{background:var(--bg);color:var(--t)}
+.sidebar a.active{background:#fdf5f5;color:var(--p);font-weight:600;border-left:3px solid var(--p)}
+.sidebar .s-label{font-size:10px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.08em;padding:10px 16px 4px}
+.main{flex:1;margin-left:var(--sidebar);padding:32px 40px;max-width:880px}
+h1.doc-title{font-size:26px;font-weight:700;color:var(--p);margin-bottom:4px}
+.doc-meta{font-size:11px;color:#888;margin-bottom:28px}
+h2{font-size:18px;font-weight:700;color:var(--t);margin:36px 0 12px;padding-bottom:8px;border-bottom:2px solid var(--p);display:inline-block}
+h3{font-size:15px;font-weight:700;color:var(--t);margin:24px 0 10px}
+h4{font-size:13px;font-weight:700;color:var(--t);margin:16px 0 6px}
+p{font-size:13px;color:#555;line-height:1.85;margin-bottom:8px}
+ul,ol{margin:8px 0 12px 20px;font-size:13px;color:#555;line-height:1.85}
+li{margin-bottom:5px}
+table{width:100%;border-collapse:collapse;font-size:12.5px;margin:12px 0}
+th{text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--m);padding:7px 10px;border-bottom:2px solid var(--b);background:#faf8f3}
+td{padding:7px 10px;border-bottom:1px solid var(--b);color:#555;vertical-align:top}
+td:first-child,th:first-child{font-weight:600;color:var(--t)}
+tr:hover td{background:#fdfaf8}
+.card{background:var(--s);border:1px solid var(--b);border-radius:10px;padding:16px 20px;margin-bottom:14px}
+.card h4{font-size:13px;font-weight:700;margin:0 0 8px}
+.card p{font-size:12.5px;margin:0;color:#666}
+.highlight{background:#fff9e6;border:1px solid #f0c14b;border-radius:8px;padding:12px 16px;font-size:13px;margin:12px 0}
+.highlight strong{color:#d97706}
+.warning{background:#fee2e2;border:1px solid #dc2626;border-radius:8px;padding:12px 16px;font-size:13px;margin:12px 0}
+.warning strong{color:#dc2626}
+.info{background:#dbeafe;color:#1d4ed8;border-radius:8px;padding:12px 16px;font-size:13px;margin:12px 0}
+.info strong{color:#1d4ed8}
+pre{background:#2c2c2c;color:#e0e0e0;border-radius:8px;padding:16px;margin:12px 0;font-size:12px;line-height:1.7;overflow-x:auto}
+.timeline{margin:16px 0;padding-left:20px;border-left:3px solid var(--b)}
+.tl-item{margin-bottom:20px;position:relative;padding-left:16px}
+.tl-item::before{content:'';position:absolute;left:-26px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--p)}
+.tl-item h4{font-size:13px;margin:0 0 4px}
+.tl-item p{font-size:12px;margin:0;color:#888}
+.col2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.col3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.tag{display:inline-block;font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px}
+.tag-green{background:#dcfce7;color:#16a34a}
+.tag-red{background:#fee2e2;color:#dc2626}
+.tag-blue{background:#dbeafe;color:#1d4ed8}
+.tag-yellow{background:#fef3c7;color:#d97706}
+.tag-purple{background:#f3e8ff;color:#7c3aed}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <span class="logo">🐾</span>
+  <h1>个体工商户注册流程 · 软件项目承接指南</h1>
+  <span class="badge">v1.0</span>
+</nav>
+
+<div class="body">
+  <aside class="sidebar">
+    <div class="s-label">目录</div>
+    <a href="#s1">一、为什么选个体户</a>
+    <a href="#s2">二、注册前准备</a>
+    <a href="#s3">三、注册流程</a>
+    <a href="#s4">四、税务登记</a>
+    <a href="#s5">五、刻章/银行开户</a>
+    <a href="#s6">六、注册后事项</a>
+    <a href="#s7">七、成本估算</a>
+    <a href="#s8">八、运营注意事项</a>
+  </aside>
+
+  <div class="main">
+
+    <h1 class="doc-title">个体工商户注册流程</h1>
+    <p class="doc-meta">版本 v1.0 | 2026年3月 | 适用于：承接软件项目</p>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <h2 id="s1">一、为什么选个体工商户</h2>
+
+    <div class="col2">
+      <div class="card">
+        <h4>✅ 优点</h4>
+        <p>
+          • 注册门槛低，费用少<br>
+          • 税务简单，可核定征收<br>
+          • 可以开发票给委托方<br>
+          • 经营灵活，注销简单<br>
+          • 创业者最低成本试水
+        </p>
+      </div>
+      <div class="card">
+        <h4>⚠️ 缺点</h4>
+        <p>
+          • 不能转让，主体单一<br>
+          • 无限责任（经营风险个人担）<br>
+          • 信用度不如公司<br>
+          • 融资能力弱
+        </p>
+      </div>
+    </div>
+
+    <h3>对比：公司 vs 个体户</h3>
+    <table>
+      <tr><th>对比项</th><th>个体工商户</th><th>有限责任公司</th></tr>
+      <tr><td>注册费用</td><td>免费或几十元</td><td>500-1000元（代理）</td></tr>
+      <tr><td>注册时间</td><td>3-7天</td><td>7-15天</td></tr>
+      <tr><td>税务复杂度</td><td>简单</td><td>复杂（要做账）</td></tr>
+      <tr><td>发票</td><td>可以申请</td><td>可以申请</td></tr>
+      <tr><td>对公账户</td><td>可选</td><td>必须</td></tr>
+      <tr><td>责任</td><td>无限连带责任</td><td>有限责任（出资额为限）</td></tr>
+      <tr><td>适合规模</td><td>小规模/个人副业</td><td>规模化/多人合作</td></tr>
+    </table>
+
+    <div class="highlight">
+      <strong>结论：</strong>如果是你一个人承接软件项目，个体工商户是最低成本的选择。等业务做大了再升级成有限责任公司也不迟。
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <h2 id="s2">二、注册前准备</h2>
+
+    <h3>2.1 确定基本信息</h3>
+    <table>
+      <tr><th>事项</th><th>说明</th><th>建议</th></tr>
+      <tr><td>字号名称</td><td>格式：广州市+字号+行业+组织形式</td><td>如"天河区coder软件工作室"</td></tr>
+      <tr><td>组织形式</td><td>个体户一般选"店"或"工作室"</td><td>"软件开发中心"更专业</td></tr>
+      <tr><td>经营范围</td><td>要包含软件开发相关</td><td>软件开发和销售、技术服务、信息技术咨询服务</td></tr>
+      <tr><td>经营地址</td><td>可以用住宅（部分城市）</td><td>需要提供租赁合同或房产证</td></tr>
+    </table>
+
+    <h3>2.2 需要准备的材料</h3>
+    <table>
+      <tr><th>材料</th><th>份数</th><th>说明</th></tr>
+      <tr><td>经营者身份证</td><td>原件+复印件</td><td>正反面</td></tr>
+      <tr><td>经营者证件照</td><td>1-2张</td><td>黑白或彩色</td></tr>
+      <tr><td>地址证明</td><td>原件+复印件</td><td>租赁合同或房产证</td></tr>
+      <tr><td>名称预先核准通知书</td><td>线上申请后获取</td><td>广东/上海等地已电子化</td></tr>
+      <tr><td>个体工商户申请表</td><td>窗口领取或网上填</td><td></td></tr>
+    </table>
+
+    <div class="info">
+      <strong>💡 经营范围参考（软件开发类）：</strong><br>
+      软件开发、销售；软件技术转让、技术服务；信息系统集成服务；数据处理和存储支持服务；信息技术咨询服务；动漫游戏开发；数字内容服务；互联网广告服务；专利代理。
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <h2 id="s3">三、注册流程</h2>
+
+    <h3>方式一：全流程网上办理（推荐）</h3>
+    <p>适用城市：北京、上海、广东（粤省事）、浙江（浙里办）、江苏等</p>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <h4>Step 1：企业名称自主申报</h4>
+        <p>广东：「粤省事」小程序 → 开业 → 个体工商户登记<br>
+        上海：「一网通办」网站<br>
+        其他：「全程电子化」或当地市场监管局网上系统</p>
+      </div>
+      <div class="tl-item">
+        <h4>Step 2：填写申请信息</h4>
+        <p>字号名称 → 经营者信息 → 经营范围 → 经营地址 → 组织形式</p>
+      </div>
+      <div class="tl-item">
+        <h4>Step 3：电子签名</h4>
+        <p>用「粤商通」APP 或当地政务APP 刷脸签名</p>
+      </div>
+      <div class="tl-item">
+        <h4>Step 4：领取营业执照</h4>
+        <p>审核通过后，可选「邮寄到家」或「窗口自取」<br>
+        时间：1-3个工作日</p>
+      </div>
+    </div>
+
+    <h3>方式二：窗口办理</h3>
+    <div class="timeline">
+      <div class="tl-item">
+        <h4>Step 1：核名</h4>
+        <p>到辖区市场监管所（工商所）领取《名称预先核准申请表》，填写后等待核准（1-2天）</p>
+      </div>
+      <div class="tl-item">
+        <h4>Step 2：提交材料</h4>
+        <p>携带身份证、地址证明、名称核准通知书，填写《个体工商户开业登记申请书》</p>
+      </div>
+      <div class="tl-item">
+        <h4>Step 3：领取执照</h4>
+        <p>审核通过，当场或1-3天后领取营业执照正副本</p>
+      </div>
+    </div>
+
+    <div class="highlight">
+      <strong>⏱️ 所需时间：</strong>网上办理 1-3天，窗口办理 3-7天<br>
+      <strong>💰 费用：</strong>全程免费（除非选择代理服务）
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <h2 id="s4">四、税务登记</h2>
+
+    <div class="warning">
+      <strong>⚠️ 重要！拿到营业执照后30天内必须完成税务登记！</strong><br>
+      逾期未办理会被罚款。
+    </div>
+
+    <h3>4.1 税务报到流程</h3>
+    <div class="timeline">
+      <div class="tl-item">
+        <h4>Step 1：电子税务局开户</h4>
+        <p>拿到营业执照后，登录当地电子税务局（如广东电子税务局）进行新办纳税人套餐</p>
+      </div>
+      <div class="tl-item">
+        <h4>Step 2：填写税种</h4>
+        <p>勾选需要申报的税种：增值税、个人所得税（经营所得）等</p>
+      </div>
+      <div class="tl-item">
+        <h4>Step 3：选择征收方式</h4>
+        <p>一般纳税人 / 小规模纳税人（软件类多数选小规模）</p>
+      </div>
+      <div class="tl-item">
+        <h4>Step 4：申请发票</h4>
+        <p>完成税务登记后，可申请增值税普通发票或专用发票</p>
+      </div>
+    </div>
+
+    <h3>4.2 税务申报周期</h3>
+    <table>
+      <tr><th>税种</th><th>申报周期</th><th>说明</th></tr>
+      <tr><td>增值税</td><td>月度/季度</td><td>小规模季度报，一般纳税人月度报</td></tr>
+      <tr><td>个人所得税（经营所得）</td><td>季度预缴，年度汇算</td><td>按五级累进税率计算</td></tr>
+      <tr><td>个人所得税（工资薪金）</td><td>月度</td><td>如果你给自己发工资</td></tr>
+      <tr><td>增值税附加税</td><td>同增值税</td><td>城建税、教育费附加、地方教育附加</td></tr>
+    </table>
+
+    <h3>4.3 核定征收 vs 查账征收</h3>
+    <div class="col2">
+      <div class="card">
+        <h4>核定征收（推荐软件类）</h4>
+        <p>税务部门核定一个固定税率<br>
+        营业额小的话可以免税<br>
+        不需要每个月做账，适合个人<br>
+        申请难度：部分城市已收紧</p>
+      </div>
+      <div class="card">
+        <h4>查账征收</h4>
+        <p>按实际账目计算利润后征税<br>
+        需要每月做账（代理记账费300-500/月）<br>
+        成本可抵扣，但运营成本高<br>
+        适合营业额较大（>100万/年）</p>
+      </div>
+    </div>
+
+    <h3>4.4 软件开发类税率参考（小规模纳税人）</h3>
+    <table>
+      <tr><th>收入区间</th><th>增值税</th><th>个人所得税（经营所得）</th></tr>
+      <tr><td>季度 < 30万</td><td>免征（普票）</td><td>核定征收，约0.5-1.5%</td></tr>
+      <tr><td>季度 ≥ 30万</td><td>1%</td><td>核定征收，约0.5-1.5%</td></tr>
+      <tr><td>开专票</td><td>1%</td><td>同上</td></tr>
+    </table>
+
+    <div class="highlight">
+      <strong>💡 发票免税技巧：</strong><br>
+      开具增值税普通发票，季度销售额30万以内免征增值税。<br>
+      如果委托方不需要专票，尽量开普票，可以省税。
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <h2 id="s5">五、刻章与银行开户</h2>
+
+    <h3>5.1 刻章</h3>
+    <table>
+      <tr><th>章类型</th><th>用途</th><th>费用</th><th>是否必需</th></tr>
+      <tr><td>公章</td><td>合同、官方文件</td><td>100-200元</td><td><span class="tag tag-green">必需</span></td></tr>
+      <tr><td>财务章</td><td>银行结算、发票</td><td>100元</td><td><span class="tag tag-green">必需</span></td></tr>
+      <tr><td>法人私章</td><td>银行印鉴</td><td>50元</td><td><span class="tag tag-yellow">可选</span></td></tr>
+      <tr><td>发票章</td><td>开发票用</td><td>50元</td><td><span class="tag tag-yellow">如果要开发票</span></td></tr>
+    </table>
+
+    <div class="info">
+      <strong>刻章地点：</strong>当地公安机关指定的刻章点（一般在政务中心有），不要随便找路边刻章店。
+    </div>
+
+    <h3>5.2 银行开户</h3>
+    <div class="card">
+      <h4>对公账户 vs 不开对公账户</h4>
+      <p>
+        <strong>如果委托方需要对公转账</strong>：必须开对公账户<br>
+        <strong>如果委托方可以私人转账</strong>：可以先不开（但不利于建立信任）<br>
+        <br>
+        银行开户需要：营业执照 + 公章 + 法人身份证 + 场地证明（部分银行要）<br>
+        费用：0-500元/年（不同银行差异大，建议选小银行如农商行、民生）
+      </p>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <h2 id="s6">六、注册后必须完成的事项</h2>
+
+    <table>
+      <tr><th>事项</th><th>期限</th><th>说明</th></tr>
+      <tr><td>税务登记</td><td>拿到执照后30天内</td><td>否则罚款</td></tr>
+      <tr><td>开通社保账户（如果招人）</td><td>招人30天内</td><td>不招人可跳过</td></tr>
+      <tr><td>公积金开户（如果招人）</td><td>招人30天内</td><td>不招人可跳过</td></tr>
+      <tr><td>年报公示</td><td>每年1-6月</td><td>不报会被列异常</td></tr>
+      <tr><td>刻章</td><td>注册后尽快</td><td>签合同要用公章</td></tr>
+      <tr><td>申请发票</td><td>需要开票前</td><td>先做税务登记</td></tr>
+    </table>
+
+    <h3>年报公示（每年必须做）</h3>
+    <p>登录「国家企业信用信息公示系统」www.gsxt.gov.cn，填写上一年度经营数据，6月30日前完成。逾期会被列入经营异常名录。</p>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <h2 id="s7">七、成本估算</h2>
+
+    <table>
+      <tr><th>项目</th><th>费用</th><th>备注</th></tr>
+      <tr><td>工商注册</td><td>0元</td><td>全程免费</td></tr>
+      <tr><td>刻章（一套）</td><td>200-400元</td><td>公章+财务章+发票章</td></tr>
+      <tr><td>银行开户</td><td>0-500元/年</td><td>选小银行更便宜</td></tr>
+      <tr><td>代理记账（查账征收）</td><td>300-500元/月</td><td>核定征收可不做账</td></tr>
+      <tr><td>注册地址（如果需要）</td><td>0-2000元/月</td><td>可用住宅或挂靠</td></tr>
+      <tr><td>发票打印机</td><td>300-800元</td><td>可选，税务UK也可以</td></tr>
+    </table>
+
+    <div class="highlight">
+      <strong>最低成本测算（核定征收，不开对公户）：</strong><br>
+      首年：刻章200元 + 银行开户0元 = <strong>约200元</strong><br>
+      每年维护：年检免费 = <strong>几乎0成本</strong>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <h2 id="s8">八、运营注意事项</h2>
+
+    <h3>8.1 记账报税要点</h3>
+    <ul>
+      <li>核定征收：税务部门核定税率后，按时报税即可，不需要专业会计</li>
+      <li>保留好所有发票和支出凭证（吃饭、交通、办公用品等可入账）</li>
+      <li>私人银行卡和公司账户分开，避免混用</li>
+      <li>每笔业务签合同并开发票，降低税务风险</li>
+    </ul>
+
+    <h3>8.2 发票开具注意事项</h3>
+    <table>
+      <tr><th>委托方类型</th><th>开票类型</th><th>税率</th></tr>
+      <tr><td>一般企业</td><td>增值税普通发票 / 专用发票</td><td>1%（小规模）</td></tr>
+      <tr><td>政府/学校</td><td>需要一般纳税人资格开专票</td><td>6%（一般纳税人）</td></tr>
+      <tr><td>个人</td><td>可开普票或个人代开</td><td>免税额度内0%</td></tr>
+    </table>
+
+    <div class="warning">
+      <strong>⚠️ 虚开发票是刑事犯罪！</strong><br>
+      发票必须基于真实业务，开具与实际业务不符的发票会构成虚开增值税专用发票罪，最高可判无期。
+    </div>
+
+    <h3>8.3 经营风险提示</h3>
+    <ul>
+      <li><strong>合同风险</strong>：签合同前看清楚条款，软件开发类要写清楚验收标准、交付物、知识产权归属</li>
+      <li><strong>无限责任</strong>：个体户经营失败，债权人可以追索个人财产</li>
+      <li><strong>社保</strong>：不招人则不用管，招人必须交</li>
+      <li><strong>异常名录</strong>：不年报、地址失联会被列入经营异常，影响法人信用</li>
+    </ul>
+
+    <h3>8.4 什么时候建议升级成公司？</h3>
+    <div class="col2">
+      <div class="card">
+        <h4>继续用个体户</h4>
+        <p>• 一个人承接项目<br>• 年营业额 < 500万<br>• 风险可控</p>
+      </div>
+      <div class="card">
+        <h4>建议注册公司</h4>
+        <p>• 有合伙人/联合创始人<br>• 年营业额 > 500万<br>• 需要融资/拿投资<br>• 业务风险较高</p>
+      </div>
+    </div>
+
+    <div style="margin-top:40px;padding:16px;background:#f5f3ef;border-radius:8px;font-size:12px;color:#888;text-align:center">
+      个体工商户注册流程 v1.0 · 2026年3月 · 村口情报社<br>
+      免责声明：本指南仅供参考，具体以当地政策为准，建议咨询专业财税顾问
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
