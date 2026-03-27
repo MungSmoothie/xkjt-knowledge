@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pencil VSCode 设计插件使用指南</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#8b2635;--bg:#faf8f3;--surface:#fff;--border:#e8e0d5;--text:#1a1a1a;--muted:#999;--sidebar-w:220px;--header-h:52px}
+html,body{height:100%}
+body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text)}
+a{text-decoration:none;color:inherit}
+
+/* Header */
+.header{
+  height:var(--header-h);background:var(--primary);color:#fff;
+  display:flex;align-items:center;padding:0 20px;gap:16px;
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  box-shadow:0 2px 8px rgba(0,0,0,.15);
+}
+.header .logo{font-size:20px;flex-shrink:0}
+.header h1{font-size:15px;font-weight:600;flex:1}
+.header .badge{font-size:10px;background:rgba(255,255,255,.25);padding:2px 8px;border-radius:4px}
+
+/* Layout */
+.layout{display:flex;margin-top:var(--header-h);height:calc(100vh - var(--header-h));overflow:hidden}
+
+/* Sidebar */
+.sidebar{width:var(--sidebar-w);flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);overflow-y:auto;padding:12px 0}
+.sidebar-section{margin-bottom:8px}
+.sidebar-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;padding:6px 14px 3px}
+.nav-item{
+  display:flex;align-items:center;gap:8px;padding:7px 14px;
+  font-size:12.5px;color:#555;cursor:pointer;
+  border-left:3px solid transparent;transition:all .12s;
+}
+.nav-item:hover{background:var(--bg);color:var(--text)}
+.nav-item.active{background:#fdf5f5;color:var(--primary);border-left-color:var(--primary);font-weight:600}
+.nav-item .icon{font-size:14px}
+
+/* Main content */
+.main{flex:1;overflow-y:auto;padding:32px 40px}
+.page-title{font-size:24px;font-weight:700;color:var(--primary);margin-bottom:8px;padding-bottom:12px;border-bottom:2px solid var(--primary);display:inline-block}
+.page-subtitle{font-size:13px;color:#888;margin-bottom:28px}
+
+.section{margin-bottom:36px}
+.section h2{font-size:17px;font-weight:700;color:var(--text);margin:24px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.section h3{font-size:15px;font-weight:700;color:var(--text);margin:18px 0 8px}
+.section p{font-size:13.5px;color:#555;line-height:1.8;margin-bottom:10px}
+.section ul,.section ol{margin:8px 0 12px 22px;font-size:13.5px;color:#555;line-height:1.8}
+.section li{margin-bottom:5px}
+.section table{width:100%;border-collapse:collapse;font-size:12.5px;margin:12px 0}
+.section th{text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);padding:7px 10px;border-bottom:2px solid var(--border);background:#faf8f3}
+.section td{padding:8px 10px;border-bottom:1px solid var(--border);color:#555;vertical-align:top}
+.section td:first-child{font-weight:600;color:var(--text)}
+
+blockquote{
+  border-left:4px solid var(--primary);padding:12px 16px;margin:16px 0;
+  background:#fdf5f5;border-radius:0 8px 8px 0;font-size:13px;color:#555;line-height:1.7
+}
+
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px 24px;margin-bottom:16px}
+.card h3{font-size:14px;font-weight:700;margin-bottom:8px}
+.card p{font-size:12.5px;color:#666;margin:0}
+
+.step{display:flex;gap:16px;margin-bottom:20px;align-items:flex-start}
+.step-num{
+  width:28px;height:28px;background:var(--primary);color:#fff;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;flex-shrink:0;
+}
+.step-content h4{font-size:13px;font-weight:700;margin-bottom:4px}
+.step-content p{font-size:12px;color:#666;margin:0}
+
+.tip{
+  background:#f0f9f0;border:1px solid #bbf7d0;border-radius:8px;
+  padding:12px 16px;margin:12px 0;font-size:12.5px;color:#166534;
+}
+.tip::before{content:"💡 ";}
+
+.warn{
+  background:#fffbeb;border:1px solid #fde68a;border-radius:8px;
+  padding:12px 16px;margin:12px 0;font-size:12.5px;color:#92400e;
+}
+.warn::before{content:"⚠️ ";}
+
+.code{
+  background:#1e1e1e;color:#d4d4d4;border-radius:8px;
+  padding:16px 20px;font-family:"SF Mono",Menlo,monospace;
+  font-size:12px;line-height:1.7;overflow-x:auto;margin:12px 0;
+}
+.code .comment{color:#6a9955}
+.code .keyword{color:#569cd6}
+.code .string{color:#ce9178}
+
+.flow{
+  display:flex;align-items:center;gap:8px;margin:20px 0;flex-wrap:wrap;
+}
+.flow-box{
+  background:var(--surface);border:2px solid var(--primary);
+  border-radius:8px;padding:8px 16px;font-size:12px;font-weight:600;
+  color:var(--primary);
+}
+.flow-arrow{color:var(--muted);font-size:16px}
+
+.keybind{
+  display:inline-flex;align-items:center;gap:4px;margin:2px;
+}
+.keybind kbd{
+  background:#f0ebe6;border:1px solid #d0c8c0;border-radius:4px;
+  padding:2px 6px;font-size:11px;font-family:inherit;
+  box-shadow:0 1px 0 #d0c8c0;
+}
+
+.highlight-box{
+  background:linear-gradient(135deg,#8b2635,#6b1e2a);
+  color:#fff;border-radius:12px;padding:24px 28px;margin:20px 0;
+}
+.highlight-box h3{color:#fff;font-size:15px;margin-bottom:10px}
+.highlight-box p{color:rgba(255,255,255,.85);font-size:13px;margin:0}
+
+.bottom-nav{
+  display:flex;gap:12px;margin-top:32px;padding-top:20px;
+  border-top:1px solid var(--border);
+}
+.bottom-nav a{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 16px;background:var(--primary);color:#fff;
+  border-radius:6px;font-size:12.5px;font-weight:600;
+  transition:all .15s;
+}
+.bottom-nav a:hover{background:#6b1e2a}
+
+*تام*</parameter>
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="logo">🐕</div>
+  <h1>村口情报社</h1>
+  <span class="badge">知识库</span>
+</div>
+
+<div class="layout">
+  <!-- Main -->
+  <main class="main">
+
+    <h1 class="page-title">Pencil VSCode 设计插件使用指南</h1>
+    <p class="page-subtitle">版本 v1.0 · 2026-03-27 · 适用于：设计师 & 开发者</p>
+
+    <!-- 什么是 Pencil -->
+    <div class="section">
+      <h2>Pencil 是什么</h2>
+
+      <div class="highlight-box">
+        <h3>一句话定位</h3>
+        <p>直接在 VSCode 里做 UI 设计并导出代码的 AI 设计工具，支持 React / Tailwind CSS / Next.js 代码导出。</p>
+      </div>
+
+      <table>
+        <tr><td>定位</td><td>设计+代码二合一工具</td></tr>
+        <tr><td>安装</td><td>VSCode 扩展商店 / Cursor 插件</td></tr>
+        <tr><td>文件格式</td><td>.pen（JSON格式，可用 Git 管理）</td></tr>
+        <tr><td>导出</td><td>React / Tailwind CSS / Next.js</td></tr>
+        <tr><td>AI 集成</td><td>MCP 协议，接入 Claude Code / Cursor</td></tr>
+      </table>
+    </div>
+
+    <!-- 安装 -->
+    <div class="section">
+      <h2>安装方法</h2>
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>打开 VSCode 扩展面板</h4>
+          <p>按 <span class="keybind"><kbd>Ctrl</kbd></span> + <span class="keybind"><kbd>Shift</kbd></span> + <span class="keybind"><kbd>X</kbd></span> 或点击左侧扩展图标</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>搜索 "Pencil"</h4>
+          <p>在扩展商店搜索框输入"Pencil"，找到官方插件（发布者为 Pencil Dev）</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>安装并重启</h4>
+          <p>点击安装，重启 VSCode，侧边栏会出现铅笔图标 ✏️</p>
+        </div>
+      </div>
+
+      <div class="tip">Mac 用户也可以下载桌面版：<a href="https://www.pencil.dev/downloads" style="color:inherit;text-decoration:underline">pencil.dev/downloads</a></div>
+    </div>
+
+    <!-- Stitch 联动 -->
+    <div class="section">
+      <h2>Stitch + Pencil 工作流</h2>
+
+      <p>Stitch 和 Pencil 是两个互补的工具，组合使用效率翻倍：</p>
+
+      <div class="flow">
+        <div class="flow-box">Stitch 生成初稿</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box">Pencil 精细调整</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box">AI 修改细节</div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-box">导出代码</div>
+      </div>
+
+      <table>
+        <thead>
+          <tr><th>步骤</th><th>工具</th><th>操作</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Stitch</td><td>用 AI 对话生成初始 UI 界面</td></tr>
+          <tr><td>2</td><td>Pencil</td><td>导入 Stitch 截图，在 VSCode 里打开</td></tr>
+          <tr><td>3</td><td>Pencil + AI</td><td>用自然语言提示词修改细节（如"改成暗红色主题"）</td></tr>
+          <tr><td>4</td><td>Pencil</td><td>点 Export，选择 React/Tailwind，复制代码</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Stitch 导入步骤 -->
+    <div class="section">
+      <h2>Stitch 稿子导入 Pencil 步骤</h2>
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>在 Stitch 中导出设计稿</h4>
+          <p>Stitch 支持导出截图或生成分享链接，用于后续编辑</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>VSCode 打开 Pencil</h4>
+          <p>点击侧边栏铅笔图标 ✏️，新建或打开一个 .pen 文件</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>拖入 Stitch 截图</h4>
+          <p>直接把 Stitch 的截图拖入 Pencil 画布，Pencil 会自动识别组件边界</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h4>用 AI 提示词修改</h4>
+          <p>在输入框输入自然语言，如"把这个按钮改成 #8b2635 暗红色，圆角加大"</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <h4>导出代码</h4>
+          <p>右上角点 Export → 选择 React / Tailwind / Next.js → 复制粘贴到项目</p>
+        </div>
+      </div>
+
+      <div class="warn">Pencil 免费版 AI 生成次数有限，高级功能需要登录账号解锁</div>
+    </div>
+
+    <!-- AI 修改示例 -->
+    <div class="section">
+      <h2>常用 AI 提示词示例</h2>
+
+      <div class="code"># 修改按钮颜色
+把这个按钮的背景色改成 #8b2635，文字改成白色
+
+# 修改字体
+课程标题的字体加大到 20px，字重加粗
+
+# 添加组件
+在课程卡片右下角添加一个"会员免费"标签，背景用金色
+
+# 修改布局
+把章节目录从左侧移到右侧
+
+# 添加交互
+给播放按钮添加鼠标悬浮效果</div>
+
+      <div class="tip">提示词越具体，AI 生成效果越好。建议一次只改一个点，不要一次性提太多要求。</div>
+    </div>
+
+    <!-- 快捷键 -->
+    <div class="section">
+      <h2>常用快捷键</h2>
+
+      <table>
+        <tr><td>新建 .pen 文件</td><td><span class="keybind"><kbd>Ctrl</kbd></span> + <span class="keybind"><kbd>Alt</kbd></span> + <kbd>N</kbd></td></tr>
+        <tr><td>打开 Pencil 侧边栏</td><td><span class="keybind"><kbd>Ctrl</kbd></span> + <span class="keybind"><kbd>Shift</kbd></span> + <kbd>P</kbd> → "Pencil"</td></tr>
+        <tr><td>AI 生成</td><td>在画布顶部输入框输入提示词</td></tr>
+        <tr><td>导出代码</td><td>画布右上角 Export 按钮</td></tr>
+        <tr><td>撤销</td><td><span class="keybind"><kbd>Ctrl</kbd></span> + <span class="keybind"><kbd>Z</kbd></span></td></tr>
+      </table>
+    </div>
+
+    <!-- 与 Claude Code 联动 -->
+    <div class="section">
+      <h2>Pencil + Claude Code 联动</h2>
+
+      <p>Pencil 支持 MCP 协议，可以直接让 Claude Code 操作设计稿：</p>
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>在 Pencil 中获取连接码</h4>
+          <p>打开 Pencil App → 点击 Connect → 复制显示的邮箱地址</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>在 Claude Code 中连接</h4>
+          <p>运行 <span class="keybind"><kbd>/mcp</kbd></span> 命令，确认 pencil 已连接</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>用自然语言改设计</h4>
+          <p>在 Claude Code 里输入"帮我把这个登录页的按钮改成暗红色主题"</p>
+        </div>
+      </div>
+
+      <div class="code"># Claude Code 中可用的 Pencil 命令
+/pencil generate "创建一个课程详情页面，包含视频播放器"
+/pencil modify "把导航栏背景改成深色"
+/pencil export --format react</div>
+    </div>
+
+    <!-- 与小动物项目结合 -->
+    <div class="section">
+      <h2>🎯 用 Pencil 做"小动物科研培训平台"设计</h2>
+
+      <p>结合俺们知识库里的 UI 设计规范，可以这样用 Pencil：</p>
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>导入俺的 UI 设计规范</h4>
+          <p>把咱平台的色彩变量（#8b2635 暗红 / #faf8f3 米白）作为提示词基础</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>AI 生成初稿</h4>
+          <p>输入："创建一个课程列表页面，使用暗红色 #8b2635 为主色调，米白色 #faf8f3 为背景"</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>导出代码</h4>
+          <p>导出为 React + Tailwind CSS，直接应用到项目</p>
+        </div>
+      </div>
+
+      <div class="code"># 小动物平台专用的 AI 提示词示例
+"设计一个课程详情页，主色 #8b2635，背景 #faf8f3，
+包含课程封面、讲师介绍、章节列表、购买按钮。
+参考俺们知识库里的 UI 规范文档。"</div>
+    </div>
+
+    <!-- 参考链接 -->
+    <div class="section">
+      <h2>参考链接</h2>
+
+      <table>
+        <tr><td>Pencil 官网</td><td><a href="https://www.pencil.dev" style="color:#8b2635">pencil.dev</a></td></tr>
+        <tr><td>Pencil 文档</td><td><a href="https://docs.pencil.dev" style="color:#8b2635">docs.pencil.dev</a></td></tr>
+        <tr><td>VSCode 扩展</td><td>搜索 "Pencil" 扩展商店</td></tr>
+        <tr><td>俺们的 UI 规范</td><td><a href="https://mungsmoothie.github.io/xkjt-knowledge/UI设计规范文档.md" style="color:#8b2635">知识库 UI 规范</a></td></tr>
+      </table>
+    </div>
+
+    <div class="bottom-nav">
+      <a href="https://mungsmoothie.github.io/xkjt-knowledge/">← 返回知识库</a>
+      <a href="https://mungsmoothie.github.io/xkjt-knowledge/UI设计规范文档.md">查看 UI 设计规范</a>
+    </div>
+
+  </main>
+</div>
+
+</body>
+</html>
