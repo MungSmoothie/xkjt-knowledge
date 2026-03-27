@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>运维保障 - 小动物科研培训平台知识库</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#8b2635;--bg:#faf8f3;--surface:#fff;--border:#e8e0d5;--text:#1a1a1a;--muted:#999;--sidebar-w:220px;--header-h:52px}
+html,body{height:100%}
+body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text)}
+a{text-decoration:none;color:inherit}
+
+/* Header */
+.header{
+  height:var(--header-h);background:var(--primary);color:#fff;
+  display:flex;align-items:center;padding:0 20px;gap:16px;
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  box-shadow:0 2px 8px rgba(0,0,0,.15);
+}
+.header .logo{font-size:20px;flex-shrink:0}
+.header h1{font-size:15px;font-weight:600;flex:1}
+.header .badge{font-size:10px;background:rgba(255,255,255,.25);padding:2px 8px;border-radius:4px}
+
+/* Layout */
+.layout{display:flex;margin-top:var(--header-h);height:calc(100vh - var(--header-h));overflow:hidden}
+
+/* Sidebar */
+.sidebar{width:var(--sidebar-w);flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);overflow-y:auto;padding:12px 0}
+.sidebar-section{margin-bottom:8px}
+.sidebar-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;padding:6px 14px 3px}
+.nav-item{
+  display:flex;align-items:center;gap:8px;padding:7px 14px;
+  font-size:12.5px;color:#555;cursor:pointer;
+  border-left:3px solid transparent;transition:all .12s;
+}
+.nav-item:hover{background:var(--bg);color:var(--text)}
+.nav-item.active{background:#fdf5f5;color:var(--primary);border-left-color:var(--primary);font-weight:600}
+.nav-item .icon{font-size:14px}
+
+/* Main content */
+.main{flex:1;overflow-y:auto;padding:32px 40px}
+.page-title{font-size:24px;font-weight:700;color:var(--primary);margin-bottom:8px;padding-bottom:12px;border-bottom:2px solid var(--primary);display:inline-block}
+.page-subtitle{font-size:13px;color:#888;margin-bottom:28px}
+
+.section{margin-bottom:36px}
+.section h2{font-size:17px;font-weight:700;color:var(--text);margin:24px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.section h3{font-size:15px;font-weight:700;color:var(--text);margin:18px 0 8px}
+.section p{font-size:13.5px;color:#555;line-height:1.8;margin-bottom:10px}
+.section ul,.section ol{margin:8px 0 12px 22px;font-size:13.5px;color:#555;line-height:1.8}
+.section li{margin-bottom:5px}
+.section table{width:100%;border-collapse:collapse;font-size:12.5px;margin:12px 0}
+.section th{text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);padding:7px 10px;border-bottom:2px solid var(--border);background:#faf8f3}
+.section td{padding:8px 10px;border-bottom:1px solid var(--border);color:#555;vertical-align:top}
+.section td:first-child{font-weight:600;color:var(--text)}
+
+.tag{display:inline-block;font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px;margin-left:4px}
+.tag-h{background:#fee2e2;color:#dc2626}
+.tag-m{background:#fef3c7;color:#d97706}
+.tag-l{background:#dcfce7;color:#16a34a}
+.tag-b{background:#dbeafe;color:#1d4ed8}
+
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px 24px;margin-bottom:16px}
+.card h3{font-size:14px;font-weight:700;margin-bottom:8px}
+.card p{font-size:12.5px;color:#666;margin:0}
+
+.toc{background:#f5f3ef;border-radius:8px;padding:16px 20px;margin:20px 0}
+.toc h4{font-size:12px;font-weight:700;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em}
+.toc a{display:block;font-size:12.5px;color:#555;padding:3px 0;border-bottom:1px dashed var(--border)}
+.toc a:last-child{border-bottom:none}
+.toc a:hover{color:var(--primary)}
+
+.status-ok{color:#16a34a}
+.status-warn{color:#d97706}
+.status-error{color:#dc2626}
+.status-info{color:#1d4ed8}
+
+blockquote{
+  border-left:4px solid var(--primary);padding:12px 16px;margin:16px 0;
+  background:#fdf5f5;border-radius:0 8px 8px 0;font-size:13px;color:#555;line-height:1.7
+}
+
+.breadcrumb{font-size:12px;color:#888;margin-bottom:16px}
+.breadcrumb a{color:var(--primary)}
+.breadcrumb span{margin:0 6px}
+</style>
+</head>
+<body>
+<header class="header">
+  <span class="logo">🐾</span>
+  <h1>小动物科研培训平台 · 知识库</h1>
+  <span class="badge">村口情报社 · 2026.03</span>
+</header>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-section"><div class="sidebar-label">📋 核心文档</div>
+<a class="nav-item" data-page="index" href="index.html"><span>🏠 首页</span></a>
+<a class="nav-item" data-page="prd" href="prd.html"><span>📋 PRD v4.0 可行性分析</span></a>
+<a class="nav-item" data-page="architecture" href="architecture.html"><span>🏗️ 系统架构</span></a>
+</div>
+<div class="sidebar-section"><div class="sidebar-label">📊 市场调研</div>
+<a class="nav-item" data-page="competitor" href="competitor.html"><span>📊 竞品分析</span></a>
+<a class="nav-item" data-page="user" href="user.html"><span>👤 目标用户画像</span></a>
+<a class="nav-item" data-page="content" href="content.html"><span>🎬 课程内容体系</span></a>
+</div>
+<div class="sidebar-section"><div class="sidebar-label">💼 商业运营</div>
+<a class="nav-item" data-page="pricing" href="pricing.html"><span>💰 定价策略</span></a>
+<a class="nav-item" data-page="promotion" href="promotion.html"><span>📣 推广获客</span></a>
+<a class="nav-item" data-page="payment" href="payment.html"><span>💳 支付接入</span></a>
+</div>
+<div class="sidebar-section"><div class="sidebar-label">🔐 技术保障</div>
+<a class="nav-item" data-page="device" href="device.html"><span>🔐 设备码体系</span></a>
+<a class="nav-item" data-page="compliance" href="compliance.html"><span>⚠️ 合规资质</span></a>
+<a class="nav-item" data-page="ops" href="ops.html"><span>🛠️ 运维保障</span></a>
+</div>
+<div class="sidebar-section"><div class="sidebar-label">🎯 增长能力</div>
+<a class="nav-item" data-page="live" href="live.html"><span>📹 直播功能</span></a>
+<a class="nav-item" data-page="team" href="team.html"><span>👥 团队协作</span></a>
+<a class="nav-item" data-page="brand" href="brand.html"><span>🌐 域名品牌</span></a>
+</div>
+
+  </aside>
+  <div class="main">
+    
+<div class="breadcrumb"><a href="index.html">知识库</a><span>›</span>技术保障<span>›</span>运维保障</div>
+<h1 class="page-title">🛠️ 运维保障</h1>
+<p class="page-subtitle">云服务选型与监控体系 · 2026年3月</p>
+
+<div class="section">
+  <h2>一、云服务选型（腾讯云全家桶）</h2>
+  <table>
+    <tr><th>服务</th><th>规格</th><th>月成本</th></tr>
+    <tr><td>VOD 视频存储+转码</td><td>50GB存储+月均1000用户</td><td>约¥300-500</td></tr>
+    <tr><td>CSS 直播</td><td>月均500观众</td><td>约¥100-200</td></tr>
+    <tr><td>COS 对象存储</td><td>10GB存储</td><td>约¥5</td></tr>
+    <tr><td>CVM 云服务器</td><td>2核4G（北京/上海）</td><td>约¥200-300</td></tr>
+    <tr><td>MySQL 数据库</td><td>2核4G 高可用版</td><td>约¥150</td></tr>
+    <tr><td>Redis 缓存</td><td>1GB</td><td>约¥50</td></tr>
+    <tr><td colspan="2"><strong>合计</strong></td><td><strong>约¥600-1000/月</strong></td></tr>
+  </table>
+</div>
+
+<div class="section">
+  <h2>二、技术架构</h2>
+  <div class="card">
+    <h3>🖥️ 前端</h3>
+    <p>Next.js → CDN + Vercel 部署。多节点 CDN 加速，全国访问延迟&lt;100ms。</p>
+  </div>
+  <div class="card">
+    <h3>⚙️ 后端</h3>
+    <p>NestJS/Go → 容器化部署。Koa/Express 单机 2000 并发，4核8G可支撑10000并发。</p>
+  </div>
+  <div class="card">
+    <h3>🗄️ 数据库</h3>
+    <p>MySQL → 主从架构，支持读写分离。Redis → 热门课程/用户 Session。</p>
+  </div>
+  <div class="card">
+    <h3>📦 存储</h3>
+    <p>COS → 静态资源（图片/课件/视频切片）。配合 CDN 加速分发。</p>
+  </div>
+</div>
+
+<div class="section">
+  <h2>三、监控体系</h2>
+  <table>
+    <tr><th>监控类型</th><th>工具</th><th>告警阈值</th></tr>
+    <tr><td>基础设施</td><td>云监控 Cloud Monitor</td><td>CPU>70%、内存>80%、流量异常</td></tr>
+    <tr><td>业务数据</td><td>自定义</td><td>DAU、课程观看量、付费转化率</td></tr>
+    <tr><td>日志</td><td>CLS 日志服务</td><td>关键词告警：错误/异常/超时</td></tr>
+    <tr><td>告警通知</td><td>企微/短信</td><td>30分钟内响应</td></tr>
+  </table>
+</div>
+
+<div class="section">
+  <h2>四、视频防盗策略</h2>
+  <blockquote>
+    视频防盗是持续投入，不是一次性工作。初级：URL 动态签名（防止直接下载）。中级：Video.js 播放器 + 跑马灯水印（显示用户手机号后4位）。高级：DRM 加密（成本高，适合高价值内容）。
+  </blockquote>
+</div>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  var active = "ops";
+  if (active) {
+    var item = document.querySelector('.nav-item[data-page="' + active + '"]');
+    if (item) item.classList.add('active');
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>首页 - 小动物科研培训平台知识库</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#8b2635;--bg:#faf8f3;--surface:#fff;--border:#e8e0d5;--text:#1a1a1a;--muted:#999;--sidebar-w:220px;--header-h:52px}
+html,body{height:100%}
+body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text)}
+a{text-decoration:none;color:inherit}
+
+/* Header */
+.header{
+  height:var(--header-h);background:var(--primary);color:#fff;
+  display:flex;align-items:center;padding:0 20px;gap:16px;
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  box-shadow:0 2px 8px rgba(0,0,0,.15);
+}
+.header .logo{font-size:20px;flex-shrink:0}
+.header h1{font-size:15px;font-weight:600;flex:1}
+.header .badge{font-size:10px;background:rgba(255,255,255,.25);padding:2px 8px;border-radius:4px}
+
+/* Layout */
+.layout{display:flex;margin-top:var(--header-h);height:calc(100vh - var(--header-h));overflow:hidden}
+
+/* Sidebar */
+.sidebar{width:var(--sidebar-w);flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);overflow-y:auto;padding:12px 0}
+.sidebar-section{margin-bottom:8px}
+.sidebar-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;padding:6px 14px 3px}
+.nav-item{
+  display:flex;align-items:center;gap:8px;padding:7px 14px;
+  font-size:12.5px;color:#555;cursor:pointer;
+  border-left:3px solid transparent;transition:all .12s;
+}
+.nav-item:hover{background:var(--bg);color:var(--text)}
+.nav-item.active{background:#fdf5f5;color:var(--primary);border-left-color:var(--primary);font-weight:600}
+.nav-item .icon{font-size:14px}
+
+/* Main content */
+.main{flex:1;overflow-y:auto;padding:32px 40px}
+.page-title{font-size:24px;font-weight:700;color:var(--primary);margin-bottom:8px;padding-bottom:12px;border-bottom:2px solid var(--primary);display:inline-block}
+.page-subtitle{font-size:13px;color:#888;margin-bottom:28px}
+
+.section{margin-bottom:36px}
+.section h2{font-size:17px;font-weight:700;color:var(--text);margin:24px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.section h3{font-size:15px;font-weight:700;color:var(--text);margin:18px 0 8px}
+.section p{font-size:13.5px;color:#555;line-height:1.8;margin-bottom:10px}
+.section ul,.section ol{margin:8px 0 12px 22px;font-size:13.5px;color:#555;line-height:1.8}
+.section li{margin-bottom:5px}
+.section table{width:100%;border-collapse:collapse;font-size:12.5px;margin:12px 0}
+.section th{text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);padding:7px 10px;border-bottom:2px solid var(--border);background:#faf8f3}
+.section td{padding:8px 10px;border-bottom:1px solid var(--border);color:#555;vertical-align:top}
+.section td:first-child{font-weight:600;color:var(--text)}
+
+.tag{display:inline-block;font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px;margin-left:4px}
+.tag-h{background:#fee2e2;color:#dc2626}
+.tag-m{background:#fef3c7;color:#d97706}
+.tag-l{background:#dcfce7;color:#16a34a}
+.tag-b{background:#dbeafe;color:#1d4ed8}
+
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px 24px;margin-bottom:16px}
+.card h3{font-size:14px;font-weight:700;margin-bottom:8px}
+.card p{font-size:12.5px;color:#666;margin:0}
+
+.toc{background:#f5f3ef;border-radius:8px;padding:16px 20px;margin:20px 0}
+.toc h4{font-size:12px;font-weight:700;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em}
+.toc a{display:block;font-size:12.5px;color:#555;padding:3px 0;border-bottom:1px dashed var(--border)}
+.toc a:last-child{border-bottom:none}
+.toc a:hover{color:var(--primary)}
+
+.status-ok{color:#16a34a}
+.status-warn{color:#d97706}
+.status-error{color:#dc2626}
+.status-info{color:#1d4ed8}
+
+blockquote{
+  border-left:4px solid var(--primary);padding:12px 16px;margin:16px 0;
+  background:#fdf5f5;border-radius:0 8px 8px 0;font-size:13px;color:#555;line-height:1.7
+}
+
+.breadcrumb{font-size:12px;color:#888;margin-bottom:16px}
+.breadcrumb a{color:var(--primary)}
+.breadcrumb span{margin:0 6px}
+</style>
+</head>
+<body>
+<header class="header">
+  <span class="logo">🐾</span>
+  <h1>小动物科研培训平台 · 知识库</h1>
+  <span class="badge">村口情报社 · 2026.03</span>
+</header>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-section"><div class="sidebar-label">📋 核心文档</div>
+<a class="nav-item" data-page="index" href="index.html"><span>🏠 首页</span></a>
+<a class="nav-item" data-page="prd" href="prd.html"><span>📋 PRD v4.0 可行性分析</span></a>
+<a class="nav-item" data-page="architecture" href="architecture.html"><span>🏗️ 系统架构</span></a>
+</div>
+<div class="sidebar-section"><div class="sidebar-label">📊 市场调研</div>
+<a class="nav-item" data-page="competitor" href="competitor.html"><span>📊 竞品分析</span></a>
+<a class="nav-item" data-page="user" href="user.html"><span>👤 目标用户画像</span></a>
+<a class="nav-item" data-page="content" href="content.html"><span>🎬 课程内容体系</span></a>
+</div>
+<div class="sidebar-section"><div class="sidebar-label">💼 商业运营</div>
+<a class="nav-item" data-page="pricing" href="pricing.html"><span>💰 定价策略</span></a>
+<a class="nav-item" data-page="promotion" href="promotion.html"><span>📣 推广获客</span></a>
+<a class="nav-item" data-page="payment" href="payment.html"><span>💳 支付接入</span></a>
+</div>
+<div class="sidebar-section"><div class="sidebar-label">🔐 技术保障</div>
+<a class="nav-item" data-page="device" href="device.html"><span>🔐 设备码体系</span></a>
+<a class="nav-item" data-page="compliance" href="compliance.html"><span>⚠️ 合规资质</span></a>
+<a class="nav-item" data-page="ops" href="ops.html"><span>🛠️ 运维保障</span></a>
+</div>
+<div class="sidebar-section"><div class="sidebar-label">🎯 增长能力</div>
+<a class="nav-item" data-page="live" href="live.html"><span>📹 直播功能</span></a>
+<a class="nav-item" data-page="team" href="team.html"><span>👥 团队协作</span></a>
+<a class="nav-item" data-page="brand" href="brand.html"><span>🌐 域名品牌</span></a>
+</div>
+
+  </aside>
+  <div class="main">
+    
+<div class="breadcrumb">知识库首页</div>
+<h1 class="page-title">🐾 小动物科研培训平台 · 知识库</h1>
+<p class="page-subtitle">垂直领域在线教育平台 · 设备码权限体系 · 医学影像培训</p>
+
+<div class="section">
+  <h2>📌 项目定位一句话</h2>
+  <blockquote>
+    基于设备码实现软硬件闭环的垂直领域在线教育平台，为小动物（犬/猫/兔/鼠等）科研人员、兽医、工程师提供专业培训课程与直播服务。
+  </blockquote>
+</div>
+
+<div class="section">
+  <h2>📊 核心数据</h2>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0">
+    <div class="card"><div style="font-size:24px;font-weight:700;color:var(--primary)">12</div><div style="font-size:11px;color:#888">调研模块</div></div>
+    <div class="card"><div style="font-size:24px;font-weight:700;color:var(--primary)">3</div><div style="font-size:11px;color:#888">核心文档</div></div>
+    <div class="card"><div style="font-size:24px;font-weight:700;color:var(--primary)">7</div><div style="font-size:11px;color:#888">开发阶段</div></div>
+    <div class="card"><div style="font-size:24px;font-weight:700;color:var(--primary)">¥600-1000</div><div style="font-size:11px;color:#888">云服务/月</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>🔑 核心结论速览</h2>
+  <table>
+    <tr><th>维度</th><th>结论</th><th>优先级</th></tr>
+    <tr><td>技术选型</td><td>网站版替代小程序（上线快、SEO可做、视频体验好）</td><td><span class="tag tag-h">必须</span></td></tr>
+    <tr><td>护城河</td><td>设备码 US/IC/MX 三类型权限体系</td><td><span class="tag tag-h">核心</span></td></tr>
+    <tr><td>最大风险</td><td>医疗合规（直播隐私+AI诊断）；视频防盗是持续投入</td><td><span class="tag tag-h">⚠️高风险</span></td></tr>
+    <tr><td>AI 能力</td><td>Phase 5 暂不上（省 ¥2000-5000/月），仅预留接口</td><td><span class="tag tag-l">暂缓</span></td></tr>
+    <tr><td>开发周期</td><td>4人并行 10 周；单人开发 16 周以上</td><td><span class="tag tag-m">参考</span></td></tr>
+    <tr><td>启动成本</td><td>云服务 ¥600-1000/月；上线准备 ¥5,000-20,000</td><td><span class="tag tag-m">参考</span></td></tr>
+  </table>
+</div>
+
+<div class="section">
+  <h2>🗺️ 知识库地图</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+    <div class="toc">
+      <h4>📋 核心文档</h4>
+      <a href="prd.html">📋 PRD v4.0 可行性分析</a>
+      <a href="architecture.html">🏗️ 系统架构设计</a>
+    </div>
+    <div class="toc">
+      <h4>📊 市场调研</h4>
+      <a href="competitor.html">📊 竞品分析</a>
+      <a href="user.html">👤 目标用户画像</a>
+      <a href="content.html">🎬 课程内容体系</a>
+    </div>
+    <div class="toc">
+      <h4>💼 商业运营</h4>
+      <a href="pricing.html">💰 定价策略</a>
+      <a href="promotion.html">📣 推广获客</a>
+      <a href="payment.html">💳 支付接入</a>
+    </div>
+    <div class="toc">
+      <h4>🔐 技术保障</h4>
+      <a href="device.html">🔐 设备码体系</a>
+      <a href="compliance.html">⚠️ 合规资质</a>
+      <a href="ops.html">🛠️ 运维保障</a>
+    </div>
+    <div class="toc">
+      <h4>🎯 增长能力</h4>
+      <a href="live.html">📹 直播功能</a>
+      <a href="team.html">👥 团队协作</a>
+      <a href="brand.html">🌐 域名品牌</a>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>⚙️ 技术栈</h2>
+  <div class="card">
+    <h3>前端</h3>
+    <p>Next.js 14 / Vue3 · TypeScript · TailwindCSS</p>
+  </div>
+  <div class="card">
+    <h3>后端</h3>
+    <p>NestJS / Go · MySQL · Redis · 腾讯云</p>
+  </div>
+  <div class="card">
+    <h3>基础设施</h3>
+    <p>腾讯云 VOD（视频存储转码）· COS（对象存储）· CSS（直播）· Cloudflare · Vercel</p>
+  </div>
+  <div class="card">
+    <h3>视频与 AI</h3>
+    <p>Video.js / flv.js（HLS+FLV 播放）· 智谱 GLM-4（AI 助手预留）· QDrant（向量数据库）</p>
+  </div>
+</div>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  var active = "index";
+  if (active) {
+    var item = document.querySelector('.nav-item[data-page="' + active + '"]');
+    if (item) item.classList.add('active');
+  }
+})();
+</script>
+</body>
+</html>

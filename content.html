@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>课程内容 - 小动物科研培训平台知识库</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--primary:#8b2635;--bg:#faf8f3;--surface:#fff;--border:#e8e0d5;--text:#1a1a1a;--muted:#999;--sidebar-w:220px;--header-h:52px}
+html,body{height:100%}
+body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text)}
+a{text-decoration:none;color:inherit}
+
+/* Header */
+.header{
+  height:var(--header-h);background:var(--primary);color:#fff;
+  display:flex;align-items:center;padding:0 20px;gap:16px;
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  box-shadow:0 2px 8px rgba(0,0,0,.15);
+}
+.header .logo{font-size:20px;flex-shrink:0}
+.header h1{font-size:15px;font-weight:600;flex:1}
+.header .badge{font-size:10px;background:rgba(255,255,255,.25);padding:2px 8px;border-radius:4px}
+
+/* Layout */
+.layout{display:flex;margin-top:var(--header-h);height:calc(100vh - var(--header-h));overflow:hidden}
+
+/* Sidebar */
+.sidebar{width:var(--sidebar-w);flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);overflow-y:auto;padding:12px 0}
+.sidebar-section{margin-bottom:8px}
+.sidebar-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;padding:6px 14px 3px}
+.nav-item{
+  display:flex;align-items:center;gap:8px;padding:7px 14px;
+  font-size:12.5px;color:#555;cursor:pointer;
+  border-left:3px solid transparent;transition:all .12s;
+}
+.nav-item:hover{background:var(--bg);color:var(--text)}
+.nav-item.active{background:#fdf5f5;color:var(--primary);border-left-color:var(--primary);font-weight:600}
+.nav-item .icon{font-size:14px}
+
+/* Main content */
+.main{flex:1;overflow-y:auto;padding:32px 40px}
+.page-title{font-size:24px;font-weight:700;color:var(--primary);margin-bottom:8px;padding-bottom:12px;border-bottom:2px solid var(--primary);display:inline-block}
+.page-subtitle{font-size:13px;color:#888;margin-bottom:28px}
+
+.section{margin-bottom:36px}
+.section h2{font-size:17px;font-weight:700;color:var(--text);margin:24px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.section h3{font-size:15px;font-weight:700;color:var(--text);margin:18px 0 8px}
+.section p{font-size:13.5px;color:#555;line-height:1.8;margin-bottom:10px}
+.section ul,.section ol{margin:8px 0 12px 22px;font-size:13.5px;color:#555;line-height:1.8}
+.section li{margin-bottom:5px}
+.section table{width:100%;border-collapse:collapse;font-size:12.5px;margin:12px 0}
+.section th{text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);padding:7px 10px;border-bottom:2px solid var(--border);background:#faf8f3}
+.section td{padding:8px 10px;border-bottom:1px solid var(--border);color:#555;vertical-align:top}
+.section td:first-child{font-weight:600;color:var(--text)}
+
+.tag{display:inline-block;font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px;margin-left:4px}
+.tag-h{background:#fee2e2;color:#dc2626}
+.tag-m{background:#fef3c7;color:#d97706}
+.tag-l{background:#dcfce7;color:#16a34a}
+.tag-b{background:#dbeafe;color:#1d4ed8}
+
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px 24px;margin-bottom:16px}
+.card h3{font-size:14px;font-weight:700;margin-bottom:8px}
+.card p{font-size:12.5px;color:#666;margin:0}
+
+.toc{background:#f5f3ef;border-radius:8px;padding:16px 20px;margin:20px 0}
+.toc h4{font-size:12px;font-weight:700;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.05em}
+.toc a{display:block;font-size:12.5px;color:#555;padding:3px 0;border-bottom:1px dashed var(--border)}
+.toc a:last-child{border-bottom:none}
+.toc a:hover{color:var(--primary)}
+
+.status-ok{color:#16a34a}
+.status-warn{color:#d97706}
+.status-error{color:#dc2626}
+.status-info{color:#1d4ed8}
+
+blockquote{
+  border-left:4px solid var(--primary);padding:12px 16px;margin:16px 0;
+  background:#fdf5f5;border-radius:0 8px 8px 0;font-size:13px;color:#555;line-height:1.7
+}
+
+.breadcrumb{font-size:12px;color:#888;margin-bottom:16px}
+.breadcrumb a{color:var(--primary)}
+.breadcrumb span{margin:0 6px}
+</style>
+</head>
+<body>
+<header class="header">
+  <span class="logo">🐾</span>
+  <h1>小动物科研培训平台 · 知识库</h1>
+  <span class="badge">村口情报社 · 2026.03</span>
+</header>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-section"><div class="sidebar-label">📋 核心文档</div>
+<a class="nav-item" data-page="index" href="index.html"><span>🏠 首页</span></a>
+<a class="nav-item" data-page="prd" href="prd.html"><span>📋 PRD v4.0 可行性分析</span></a>
+<a class="nav-item" data-page="architecture" href="architecture.html"><span>🏗️ 系统架构</span></a>
+</div>
+<div class="sidebar-section"><div class="sidebar-label">📊 市场调研</div>
+<a class="nav-item" data-page="competitor" href="competitor.html"><span>📊 竞品分析</span></a>
+<a class="nav-item" data-page="user" href="user.html"><span>👤 目标用户画像</span></a>
+<a class="nav-item" data-page="content" href="content.html"><span>🎬 课程内容体系</span></a>
+</div>
+<div class="sidebar-section"><div class="sidebar-label">💼 商业运营</div>
+<a class="nav-item" data-page="pricing" href="pricing.html"><span>💰 定价策略</span></a>
+<a class="nav-item" data-page="promotion" href="promotion.html"><span>📣 推广获客</span></a>
+<a class="nav-item" data-page="payment" href="payment.html"><span>💳 支付接入</span></a>
+</div>
+<div class="sidebar-section"><div class="sidebar-label">🔐 技术保障</div>
+<a class="nav-item" data-page="device" href="device.html"><span>🔐 设备码体系</span></a>
+<a class="nav-item" data-page="compliance" href="compliance.html"><span>⚠️ 合规资质</span></a>
+<a class="nav-item" data-page="ops" href="ops.html"><span>🛠️ 运维保障</span></a>
+</div>
+<div class="sidebar-section"><div class="sidebar-label">🎯 增长能力</div>
+<a class="nav-item" data-page="live" href="live.html"><span>📹 直播功能</span></a>
+<a class="nav-item" data-page="team" href="team.html"><span>👥 团队协作</span></a>
+<a class="nav-item" data-page="brand" href="brand.html"><span>🌐 域名品牌</span></a>
+</div>
+
+  </aside>
+  <div class="main">
+    
+<div class="breadcrumb"><a href="index.html">知识库</a><span>›</span>市场调研<span>›</span>课程内容</div>
+<h1 class="page-title">🎬 课程内容体系</h1>
+<p class="page-subtitle">课程结构/内容来源/制作成本 · 2026年3月</p>
+<div class="section"><h2>一、内容结构（60%视频+图文+直播）</h2><table><tr><th>形式</th><th>占比</th><th>说明</th><th>制作成本</th></tr><tr><td>系统课（录播）</td><td>40%</td><td>超声基础/进阶/实战系列，10-20节/课</td><td>高（¥5000-20000/课）</td></tr><tr><td>单节专题（录播）</td><td>20%</td><td>某个疾病/某类手术，时长1-2小时</td><td>中（¥1000-5000/节）</td></tr><tr><td>直播培训</td><td>20%</td><td>实时操作演示+互动答疑，每周1-2场</td><td>中（¥500-2000/场）</td></tr><tr><td>图文/电子书</td><td>10%</td><td>学习笔记、病例分析、操作规范</td><td>低（¥200-1000/篇）</td></tr><tr><td>音频课</td><td>10%</td><td>碎片时间学习，晨起/通勤场景</td><td>低（¥500-2000/课）</td></tr></table></div>
+<div class="section"><h2>二、课程类目</h2><div class="card"><h3>🔊 超声诊断系列（核心类目）</h3><p>腹部超声基础 · 心脏超声 · 超声引导穿刺 · 超声造影 · 眼科超声</p></div><div class="card"><h3>🧬 影像学系列</h3><p>X光阅片 · CT诊断 · MRI诊断 · 影像报告书写</p></div><div class="card"><h3>🔪 外科手术系列</h3><p>基础外科 · 软组织手术 · 骨科手术 · 麻醉学</p></div><div class="card"><h3>🤖 智能笼/设备操作</h3><p>设备操作培训 · 数据解读 · 维护保养 · 故障排查</p></div></div>
+<div class="section"><h2>三、内容来源</h2><table><tr><th>来源</th><th>占比</th><th>说明</th><th>策略</th></tr><tr><td>自制</td><td>40%</td><td>签约讲师录制</td><td>核心差异化内容</td></tr><tr><td>版权采购</td><td>30%</td><td>采购海外经典课程</td><td>快速填充内容</td></tr><tr><td>行业分享</td><td>20%</td><td>邀请行业专家公开课</td><td>低成本高质量</td></tr><tr><td>用户生成</td><td>10%</td><td>进阶用户贡献</td><td>社区运营</td></tr></table></div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var active = "content";
+  if (active) {
+    var item = document.querySelector('.nav-item[data-page="' + active + '"]');
+    if (item) item.classList.add('active');
+  }
+})();
+</script>
+</body>
+</html>
